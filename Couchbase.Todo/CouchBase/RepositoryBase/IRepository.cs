@@ -5,7 +5,7 @@ namespace Couchbase.Todo.CouchBase.RepositoryBase
 {
     public interface IRepository<Type> where Type : class
     {
-         void Insert(string key, Type model);
+        void Insert(Type model, string key = null);
         IEnumerable<Type> ExecQueryReturnList(IQueryRequest queryRequest);
     }
 }

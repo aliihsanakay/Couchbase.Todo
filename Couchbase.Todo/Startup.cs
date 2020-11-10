@@ -1,4 +1,6 @@
+using Couchbase.Core;
 using Couchbase.Extensions.DependencyInjection;
+using Couchbase.Management;
 using Couchbase.Todo.CouchBase.RepositoryBase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,8 +23,11 @@ namespace Couchbase.Todo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient(typeof(ICluster), typeof(Cluster));
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+                     
             services.AddCouchbase(Configuration.GetSection("Couchbase"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
